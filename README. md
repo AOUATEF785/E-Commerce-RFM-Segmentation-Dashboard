@@ -1,0 +1,32 @@
+« Ce qui démarque mon projet, ce n’est pas seulement la qualité des visuels, c’est l'approche de bout en bout (End-to-End) et son orientation Business-Driven.
+
+La double compétence Python/Power BI : Je ne me suis pas contenté d'importer un fichier propre. J'ai conçu le pipeline complet : le nettoyage de données complexes, la gestion des types, et le calcul algorithmique des scores RFM ont été codés en Python, puis le modèle a été poussé et enrichi en DAX sur Power BI.
+
+La gestion des contraintes réelles : J'ai su surmonter des problématiques concrètes d'ingénierie de données, comme les conflits de paramètres régionaux (formats de décimales US/FR) qui font habituellement échouer les calculs de CA dans les projets d'entreprise.
+
+Un Dashboard orienté action (ROI) : Ce projet n'est pas descriptif, il est prescriptif. Grâce à l'interactivité dynamique, si le Directeur Marketing clique sur le segment "At Risk", le dashboard lui montre instantanément à quel mois et à quelle heure précise (12h) ces clients achetaient. Il peut ainsi planifier une campagne de réactivation ciblée avec un retour sur investissement (ROI) maximal.
+En clair, j'ai transformé de la donnée brute en décisions stratégiques. »
+
+
+# E-Commerce Customer Segmentation & Decision-Driven Dashboard (RFM Analysis)
+
+## Présentation du Projet
+Ce projet de fin d'études combine la puissance de **Data Science (Python)** et de la **Business Intelligence (Power BI)** pour auditer, nettoyer et segmenter une base de données transactionnelle d'un site e-commerce mondial. 
+
+L'objectif principal est de construire une stratégie de **Data Storytelling** basée sur la segmentation **RFM (Récence, Fréquence, Montant)** afin de fournir au Directeur Marketing un outil interactif d'aide à la décision pour optimiser les campagnes de fidélisation et de réactivation.
+
+---
+
+## architecture Technique & Pipeline Data
+
+Le projet est structuré en deux grandes phases interconnectées :
+
+```text
+ Data Source (CSV) ──>  Pipeline Python (Jupyter) ──> Dashboard Interactif (Power BI)
+                          - Data Cleaning                 - Modélisation Étoile & DAX
+                          - Algorithme RFM                - Analyse Bivariée & Saisonnalité
+                          - Cohérence Métier              - Insights Actionnables
+
+
+
+ Métriques, KPIs et Logique de CalculPour ce projet, nous avons transformé des données brutes en indicateurs de performance (KPIs) stratégiques grâce à des modélisations DAX optimisées.1. Les KPIs Principaux (Flash Cards)Total Chiffre d'Affaires (Total CA) : $8.91\text{M}\$$Logique de calcul : C'est la somme globale des ventes après la phase stricte de nettoyage sur Python (suppression des retours, des prix nuls et des anomalies).Formule DAX : Total_CA = SUM(ecommerce_segmented_transactions[TotalAmount])Total Commandes : $19\text{K}$Logique de calcul : Représente le volume de transactions uniques. On ne compte pas le nombre de lignes, mais le nombre de factures distinctes.Formule DAX : Total_Commandes = DISTINCTCOUNT(ecommerce_segmented_transactions[InvoiceNo])Panier Moyen (Average Order Value - AOV) : $480.81\$$Logique de calcul : C'est la valeur financière moyenne d'une commande. C'est un indicateur crucial pour mesurer l'efficacité commerciale.Formule DAX : Panier_Moyen = [Total_CA] / [Total_Commandes]2. La Logique Algorithmique RFM (Le Moteur Backend)Le cœur de la segmentation repose sur trois piliers calculés par client unique (CustomerID) :Récence (Recency) : Le nombre de jours écoulés entre le dernier achat du client et la date de fin du dataset.Formule DAX : Recency_BI = DATEDIFF(ecommerce_segmented_transactions[InvoiceDate], MAX(ecommerce_segmented_transactions[InvoiceDate]), DAY)Fréquence (Frequency) : Le nombre de factures uniques par client.Montant (Monetary) : Le total dépensé par chaque client.Le scoring : Chaque client reçoit une note de 1 à 5 pour chaque critère via des quintiles algorithmiques. Un client avec le score 555 est un "Champion".Part 2: Analyse Graphique & Data StorytellingLe dashboard est conçu selon une approche Decision-Driven (orientée action) :Répartition par Segment (Treemap) : Il saute aux yeux que le segment "Champions (Top Clients)" génère la plus grande partie de la surface (donc des revenus). Cela montre une forte dépendance de l'entreprise envers ses clients fidèles.Saisonnalité Mensuelle (Line Chart) : Le graphique Total_CA par Month montre une activité stable au début, suivie d'une accélération brutale à partir de septembre (Mois 9) qui culmine en novembre/décembre. C'est l'effet classique du Q4 en E-commerce (Black Friday, fêtes de fin d'année).Heures de Pointe (Histogramme) : Le graphique Total_Commandes par Hour montre une distribution en cloche avec un pic absolu à 12h00. Les clients achètent massivement pendant leur pause déjeuner.Évolution du Panier Moyen (Area Chart) : Permet de surveiller si les clients achètent des produits plus chers à certaines périodes.Analyse Bivariée Géographique (Stacked Bar Chart) : Analyse le CA par Pays combiné aux segments. On remarque immédiatement que le United Kingdom est le marché ultra-dominant et qu'il concentre la majorité de nos "Champions".Segmentation Avancée (Scatter Chart / Nuage de Points) : Il croise la Récence en axe X et le Montant en axe Y. Il permet de voir graphiquement les "clusters" (groupes) de clients et d'isoler visuellement ceux qui sont en train de partir (haute récence, bas montant).
