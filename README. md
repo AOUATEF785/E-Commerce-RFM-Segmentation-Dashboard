@@ -14,6 +14,8 @@ Data Source (CSV) ──>  Pipeline Python (Jupyter) ──> Dashboard Interacti
                           - Algorithme RFM                - Analyse Bivariée & Saisonnalité
                           - Cohérence Métier              - Insights Actionnables
 
+## Project Dashboard Preview
+![Executive Dashboard Overview](dashboard_preview.png)
 
 Métriques, KPIs et Logique de Calcul
 Nous avons transformé les données brutes issues de Python en indicateurs de performance (KPIs) stratégiques grâce à des modélisations DAX optimisées au sein de Power BI.
