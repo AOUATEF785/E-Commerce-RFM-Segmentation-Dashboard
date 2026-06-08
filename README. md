@@ -1,61 +1,78 @@
-#  E-Commerce Customer Segmentation & Decision-Driven Dashboard (RFM Analysis)
+# 📊 E-Commerce Customer Segmentation & Decision-Driven Dashboard (RFM Analysis)
 
-## Présentation du Projet
+## 📌 Présentation du Projet
 Ce projet de fin d'études combine la puissance de la **Data Science (Python)** et de la **Business Intelligence (Power BI)** pour auditer, nettoyer et segmenter une base de données transactionnelle d'un site e-commerce mondial. 
 
 L'objectif principal est de construire une stratégie de **Data Storytelling** basée sur la segmentation **RFM (Récence, Fréquence, Montant)** afin de fournir au Directeur Marketing un outil interactif d'aide à la décision pour optimiser les campagnes de fidélisation et de réactivation des clients.
 
-## Architecture Technique & Pipeline Data
+---
+
+## ⚙️ Architecture Technique & Pipeline Data
 
 Le projet est structuré en deux grandes phases interconnectées :
 
-Data Source (CSV) ──>  Pipeline Python (Jupyter) ──> Dashboard Interactif (Power BI)
+```text
+💾 Data Source (CSV) ──> 🐍 Pipeline Python (Jupyter) ──> 📊 Dashboard Interactif (Power BI)
                           - Data Cleaning                 - Modélisation Étoile & DAX
                           - Algorithme RFM                - Analyse Bivariée & Saisonnalité
                           - Cohérence Métier              - Insights Actionnables
 
-## Project Dashboard Preview
-![Executive Dashboard Overview](dashboard_preview.png)
-
-Métriques, KPIs et Logique de Calcul
+🖼️ Project Dashboard Preview
+🧮 Métriques, KPIs et Logique de Calcul
 Nous avons transformé les données brutes issues de Python en indicateurs de performance (KPIs) stratégiques grâce à des modélisations DAX optimisées au sein de Power BI.
+
 1. Les KPIs Principaux (Flash Cards)
-     Total Chiffre d'Affaires (Total CA) : 8.91M
-          Logique de calcul : Somme globale des ventes après la phase stricte de nettoyage (suppression des retours négatifs, des prix nuls et des anomalies).
-          Formule DAX : Total_CA = SUM(ecommerce_segmented_transactions[TotalAmount])
-     Total Commandes : 19K
-           Logique de calcul : Volume de transactions uniques passées sur la plateforme (calcul basé sur l'identifiant unique de facture).
-           Formule DAX : Total_Commandes = DISTINCTCOUNT(ecommerce_segmented_transactions[InvoiceNo])
-     Panier Moyen (Average Order Value - AOV) : 480.81
-           Logique de calcul : Valeur financière moyenne dépensée lors d'une commande unique.
-           Formule DAX : Panier_Moyen = [Total_CA] / [Total_Commandes]
+Total Chiffre d'Affaires (Total CA) : 8.91M $
+
+Logique de calcul : Somme globale des ventes après la phase stricte de nettoyage (suppression des retours négatifs, des prix nuls et des anomalies).
+
+Formule DAX : Total_CA = SUM(ecommerce_segmented_transactions[TotalAmount])
+
+Total Commandes : 19K
+
+Logique de calcul : Volume de transactions uniques passées sur la plateforme (calcul basé sur l'identifiant unique de facture).
+
+Formule DAX : Total_Commandes = DISTINCTCOUNT(ecommerce_segmented_transactions[InvoiceNo])
+
+Panier Moyen (Average Order Value - AOV) : 480.81 $
+
+Logique de calcul : Valeur financière moyenne dépensée lors d'une commande unique.
+
+Formule DAX : Panier_Moyen = [Total_CA] / [Total_Commandes]
 
 2. La Logique Algorithmique RFM (Le Moteur Backend)
- Le cœur de la segmentation repose sur trois piliers calculés par client unique (CustomerID) :
+Le cœur de la segmentation repose sur trois piliers calculés par client unique (CustomerID) :
 
-       Récence (Recency) : Le nombre de jours écoulés entre le dernier achat du client et la date de fin du dataset.
-       Formule DAX : Recency_BI = DATEDIFF(ecommerce_segmented_transactions[InvoiceDate], MAX(ecommerce_segmented_transactions[InvoiceDate]), DAY)
-       Fréquence (Frequency) : Le nombre total de factures uniques par client.
-       Montant (Monetary) : Le total du budget dépensé par chaque client sur la plateforme.
-Le Scoring : Chaque client reçoit une note de 1 à 5 pour chaque critère via des quintiles algorithmiques. Un client avec le score maximal 555 est classé automatiquement comme "Champion".
+Récence (Recency) : Le nombre de jours écoulés entre le dernier achat du client et la date de fin du dataset.
 
-Analyse Graphique & Data Storytelling
-    Le dashboard adopte une approche Decision-Driven où chaque visuel apporte une réponse immédiate à une problématique business :
+Formule DAX : Recency_BI = DATEDIFF(ecommerce_segmented_transactions[InvoiceDate], MAX(ecommerce_segmented_transactions[InvoiceDate]), DAY)
 
-     Répartition par Segment (Treemap) : Il met en évidence que le segment "Champions (Top Clients)" génère la majeure partie de la surface des revenus. Cela révèle la forte dépendance de l'entreprise envers ses clients les plus fidèles.
+Fréquence (Frequency) : Le nombre total de factures uniques par client.
 
-     Saisonnalité Mensuelle (Line Chart) : Le graphique du chiffre d'affaires par mois montre une accélération brutale à partir de septembre (Mois 9) qui culmine en novembre/décembre, illustrant la saisonnalité classique du Q4 (Black Friday et fêtes de fin d'année).
+Montant (Monetary) : Le total du budget dépensé par chaque client sur la plateforme.
 
-     Heures de Pointe (Histogramme) : La distribution du volume des commandes par heure affiche un pic absolu à 12h00, indiquant que les clients achètent massivement pendant leur pause déjeuner.
+💡 Le Scoring : Chaque client reçoit une note de 1 à 5 pour chaque critère via des quintiles algorithmiques. Un client avec le score maximal 555 est classé automatiquement comme "Champion".
 
-     Évolution du Panier Moyen (Area Chart) : Permet de surveiller la tendance de la valeur des paniers au fil des mois pour anticiper les baisses d'activité.
+📉 Analyse Graphique & Data Storytelling
+Le dashboard adopte une approche Decision-Driven où chaque visuel apporte une réponse immédiate à une problématique business :
 
-     Analyse Bivariée Géographique (Stacked Bar Chart) : Analyse le CA par Pays combiné aux segments marketing. Le marché du United Kingdom apparaît comme ultra-dominant et concentre la majorité des clients à forte valeur ajoutée.
+Répartition par Segment (Treemap) : Il met en évidence que le segment "Champions (Top Clients)" génère la majeure partie de la surface des revenus. Cela révèle la forte dépendance de l'entreprise envers ses clients les plus fidèles.
 
-     Segmentation Avancée (Scatter Chart / Nuage de Points) : Croise la récence (Axe X) et le montant (Axe Y) pour chaque client, permettant d'isoler visuellement et instantanément les clusters de clients en phase d'attrition (Churn / At Risk).
+Saisonnalité Mensuelle (Line Chart) : Le graphique du chiffre d'affaires par mois montre une accélération brutale à partir de septembre (Mois 9) qui culmine en novembre/décembre, illustrant la saisonnalité classique du Q4 (Black Friday et fêtes de fin d'année).
 
-Compétences Clés Valorisées
-    Backend & Data Engineering : Python (Pandas, NumPy, Algorithme RFM).
-    Business Intelligence : Microsoft Power BI Desktop, Power Query Editor, Modélisation DAX.
-    Analyse Métier : Business Analytics, Data Storytelling, Gestion des KPIs E-Commerce.
-    Projet réalisé par Guerrab Aouatef.
+Heures de Pointe (Histogramme) : La distribution du volume des commandes par heure affiche un pic absolu à 12h00, indiquant que les clients achètent massivement pendant leur pause déjeuner.
+
+Évolution du Panier Moyen (Area Chart) : Permet de surveiller la tendance de la valeur des paniers au fil des mois pour anticiper les baisses d'activité.
+
+Analyse Bivariée Géographique (Stacked Bar Chart) : Analyse le CA par Pays combiné aux segments marketing. Le marché du United Kingdom apparaît comme ultra-dominant et concentre la majorité des clients à forte valeur ajoutée.
+
+Segmentation Avancée (Scatter Chart / Nuage de Points) : Croise la récence (Axe X) et le montant (Axe Y) pour chaque client, permettant d'isoler visuellement et instantanément les clusters de clients en phase d'attrition (Churn / At Risk).
+
+🚀 Compétences Clés Valorisées
+Backend & Data Engineering : Python (Pandas, NumPy, Algorithme RFM).
+
+Business Intelligence : Microsoft Power BI Desktop, Power Query Editor, Modélisation DAX.
+
+Analyse Métier : Business Analytics, Data Storytelling, Gestion des KPIs E-Commerce.
+
+Projet réalisé par Guerrab Aouatef.
